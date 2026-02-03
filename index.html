@@ -1,0 +1,1656 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Football for Beginners | Complete Guide</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;600;700&family=Roboto+Condensed:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --pitch-green: #1a5f1a;
+        --pitch-dark: #0f3e0f;
+        --line-white: #f5f5f5;
+        --goal-red: #ff1744;
+        --sky-blue: #4fc3f7;
+        --stadium-grey: #263238;
+        --crowd-dark: #1a1a2e;
+        --ball-white: #ffffff;
+        --yellow-card: #ffd700;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Roboto Condensed", sans-serif;
+        background: linear-gradient(
+          180deg,
+          var(--crowd-dark) 0%,
+          var(--pitch-dark) 100%
+        );
+        color: var(--line-white);
+        overflow-x: hidden;
+      }
+
+      /* Animated grass texture background */
+      body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 10px,
+          rgba(26, 95, 26, 0.1) 10px,
+          rgba(26, 95, 26, 0.1) 20px
+        );
+        z-index: -1;
+        opacity: 0.3;
+        animation: grassMove 20s linear infinite;
+      }
+
+      @keyframes grassMove {
+        from {
+          background-position: 0 0;
+        }
+        to {
+          background-position: 0 100px;
+        }
+      }
+
+      header {
+        background: linear-gradient(
+          135deg,
+          var(--pitch-dark) 0%,
+          var(--pitch-green) 100%
+        );
+        padding: 3rem 2rem;
+        text-align: center;
+        border-bottom: 5px solid var(--yellow-card);
+        position: relative;
+        overflow: hidden;
+      }
+
+      header::after {
+        content: "⚽";
+        position: absolute;
+        font-size: 15rem;
+        opacity: 0.05;
+        right: -5rem;
+        top: -3rem;
+        animation: rotateBall 20s linear infinite;
+      }
+
+      @keyframes rotateBall {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      h1 {
+        font-family: "Bebas Neue", cursive;
+        font-size: 5rem;
+        letter-spacing: 8px;
+        text-transform: uppercase;
+        margin-bottom: 0.5rem;
+        text-shadow:
+          3px 3px 0 var(--goal-red),
+          -1px -1px 0 var(--stadium-grey);
+        animation: slideDown 0.8s ease-out;
+      }
+
+      @keyframes slideDown {
+        from {
+          opacity: 0;
+          transform: translateY(-50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .tagline {
+        font-family: "Oswald", sans-serif;
+        font-size: 1.5rem;
+        color: var(--yellow-card);
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        animation: fadeIn 1s ease-out 0.3s both;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      nav {
+        background: var(--stadium-grey);
+        padding: 1rem;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+      }
+
+      nav ul {
+        list-style: none;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+
+      nav li a {
+        display: block;
+        padding: 0.8rem 1.5rem;
+        color: var(--line-white);
+        text-decoration: none;
+        font-family: "Oswald", sans-serif;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        background: linear-gradient(
+          135deg,
+          transparent,
+          rgba(255, 255, 255, 0.1)
+        );
+        border: 2px solid transparent;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      nav li a::before {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: -100%;
+        width: 100%;
+        height: 3px;
+        background: var(--goal-red);
+        transition: left 0.3s ease;
+      }
+
+      nav li a:hover::before {
+        left: 0;
+      }
+
+      nav li a.active {
+        border-color: var(--yellow-card);
+        background: rgba(255, 215, 0, 0.15);
+        color: var(--yellow-card);
+      }
+
+      nav li a:hover {
+        background: rgba(255, 255, 255, 0.15);
+        border-color: var(--goal-red);
+        transform: translateY(-2px);
+      }
+
+      .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 2rem;
+      }
+
+      section {
+        background: rgba(38, 50, 56, 0.85);
+        margin: 3rem 0;
+        padding: 3rem;
+        border-radius: 10px;
+        border-left: 8px solid var(--goal-red);
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        animation: slideInLeft 0.6s ease-out;
+        position: relative;
+        backdrop-filter: blur(10px);
+      }
+
+      @keyframes slideInLeft {
+        from {
+          opacity: 0;
+          transform: translateX(-50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      section:nth-child(even) {
+        border-left: none;
+        border-right: 8px solid var(--sky-blue);
+        animation: slideInRight 0.6s ease-out;
+      }
+
+      @keyframes slideInRight {
+        from {
+          opacity: 0;
+          transform: translateX(50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      h2 {
+        font-family: "Bebas Neue", cursive;
+        font-size: 3.5rem;
+        color: var(--yellow-card);
+        margin-bottom: 1.5rem;
+        text-transform: uppercase;
+        letter-spacing: 4px;
+        position: relative;
+        display: inline-block;
+      }
+
+      h2::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: linear-gradient(90deg, var(--goal-red), transparent);
+      }
+
+      h3 {
+        font-family: "Oswald", sans-serif;
+        font-size: 2rem;
+        color: var(--sky-blue);
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+      }
+
+      p {
+        line-height: 1.8;
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+        color: rgba(245, 245, 245, 0.9);
+      }
+
+      ul,
+      ol {
+        margin-left: 2rem;
+        margin-bottom: 1rem;
+      }
+
+      li {
+        margin: 0.8rem 0;
+        line-height: 1.7;
+        font-size: 1.1rem;
+      }
+
+      strong {
+        color: var(--yellow-card);
+        font-weight: 700;
+      }
+
+      .highlight-box {
+        background: linear-gradient(
+          135deg,
+          rgba(255, 23, 68, 0.2),
+          rgba(79, 195, 247, 0.2)
+        );
+        padding: 2rem;
+        border-radius: 8px;
+        border: 2px solid var(--goal-red);
+        margin: 2rem 0;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .highlight-box::before {
+        content: "⚽";
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        font-size: 5rem;
+        opacity: 0.1;
+      }
+
+      .pitch-diagram {
+        background: linear-gradient(
+          90deg,
+          var(--pitch-green) 49.5%,
+          var(--line-white) 49.5%,
+          var(--line-white) 50.5%,
+          var(--pitch-green) 50.5%
+        );
+        height: 400px;
+        margin: 2rem 0;
+        border: 4px solid var(--line-white);
+        position: relative;
+        box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.5);
+      }
+
+      .pitch-diagram::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 150px;
+        height: 150px;
+        border: 3px solid var(--line-white);
+        border-radius: 50%;
+      }
+
+      .pitch-diagram::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 10px;
+        height: 10px;
+        background: var(--line-white);
+        border-radius: 50%;
+      }
+
+      .grid-2 {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin: 2rem 0;
+      }
+
+      .card {
+        background: linear-gradient(
+          135deg,
+          rgba(26, 95, 26, 0.3),
+          rgba(15, 62, 15, 0.5)
+        );
+        padding: 2rem;
+        border-radius: 8px;
+        border: 2px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .card::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+          circle,
+          rgba(255, 255, 255, 0.1) 0%,
+          transparent 70%
+        );
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .card:hover::before {
+        opacity: 1;
+      }
+
+      .card:hover {
+        transform: translateY(-5px);
+        border-color: var(--goal-red);
+        box-shadow: 0 15px 40px rgba(255, 23, 68, 0.3);
+      }
+
+      .card h4 {
+        font-family: "Oswald", sans-serif;
+        font-size: 1.5rem;
+        color: var(--yellow-card);
+        margin-bottom: 1rem;
+        text-transform: uppercase;
+      }
+
+      .position-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1.5rem;
+        margin: 2rem 0;
+      }
+
+      .position {
+        background: rgba(255, 23, 68, 0.15);
+        padding: 1.5rem;
+        border-radius: 8px;
+        border: 2px solid var(--goal-red);
+        text-align: center;
+        transition: all 0.3s ease;
+      }
+
+      .position:hover {
+        background: rgba(255, 23, 68, 0.3);
+        transform: scale(1.05);
+      }
+
+      .position-title {
+        font-family: "Bebas Neue", cursive;
+        font-size: 1.8rem;
+        color: var(--line-white);
+        margin-bottom: 0.5rem;
+        letter-spacing: 2px;
+      }
+
+      footer {
+        background: var(--crowd-dark);
+        padding: 2rem;
+        text-align: center;
+        margin-top: 5rem;
+        border-top: 5px solid var(--goal-red);
+      }
+
+      footer p {
+        font-family: "Oswald", sans-serif;
+        font-size: 1.2rem;
+        letter-spacing: 2px;
+      }
+
+      .ball-icon {
+        display: inline-block;
+        animation: bounce 2s ease-in-out infinite;
+        margin: 0 0.5rem;
+      }
+
+      @keyframes bounce {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-20px);
+        }
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        h1 {
+          font-size: 3rem;
+        }
+
+        h2 {
+          font-size: 2.5rem;
+        }
+
+        section {
+          padding: 2rem;
+        }
+
+        nav ul {
+          flex-direction: column;
+        }
+      }
+
+      /* Scrollbar styling */
+      ::-webkit-scrollbar {
+        width: 12px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: var(--pitch-dark);
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: var(--goal-red);
+        border-radius: 6px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: var(--sky-blue);
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Football for Beginners</h1>
+      <p class="tagline">Master the Beautiful Game</p>
+    </header>
+
+    <nav>
+      <ul>
+        <li class="the-nav"><a href="#basics">The Basics</a></li>
+        <li class="the-nav"><a href="#positions">Positions</a></li>
+        <li class="the-nav"><a href="#rules">Rules & Laws</a></li>
+        <li class="the-nav"><a href="#tactics">Tactics</a></li>
+        <li class="the-nav"><a href="#competitions">Competitions</a></li>
+        <li class="the-nav"><a href="#transfers">Transfers</a></li>
+        <li class="the-nav"><a href="#promotion">Promotion</a></li>
+        <li class="the-nav"><a href="#glossary">Glossary</a></li>
+      </ul>
+    </nav>
+
+    <div class="container">
+      <section id="basics">
+        <h2>⚽ The Basics of Football</h2>
+
+        <h3>What is Football?</h3>
+        <p>
+          Football (known as soccer in some countries) is the world's most
+          popular sport, played by over 250 million players in more than 200
+          countries. The objective is simple:
+          <strong
+            >score more goals than your opponent by getting the ball into their
+            net</strong
+          >.
+        </p>
+
+        <div class="pitch-diagram"></div>
+
+        <h3>The Playing Field</h3>
+        <p>A standard football pitch is rectangular, typically measuring:</p>
+        <ul>
+          <li><strong>Length:</strong> 100-130 yards (90-120 meters)</li>
+          <li><strong>Width:</strong> 50-100 yards (45-90 meters)</li>
+          <li>The pitch is divided by the halfway line</li>
+          <li>Each end has a goal (24 feet wide, 8 feet high)</li>
+          <li>
+            The penalty area (18-yard box) and goal area (6-yard box) surround
+            each goal
+          </li>
+        </ul>
+
+        <h3>Team Structure</h3>
+        <div class="highlight-box">
+          <p>
+            <strong>11 Players per Team:</strong> Each team fields 11 players,
+            including one goalkeeper. Teams can have substitutes (usually 3-5
+            allowed per match depending on the competition).
+          </p>
+          <p>
+            <strong>Match Duration:</strong> Two 45-minute halves with a
+            15-minute halftime break. The referee can add stoppage time for
+            injuries and delays.
+          </p>
+        </div>
+
+        <h3>Basic Objective</h3>
+        <p>
+          Score goals by kicking the ball into the opponent's net. Players
+          (except the goalkeeper in their penalty area) cannot use their hands
+          or arms. The team with the most goals at the end wins!
+        </p>
+      </section>
+
+      <section id="positions">
+        <h2>🎯 Player Positions</h2>
+
+        <p>
+          Football positions are typically divided into four main categories:
+        </p>
+
+        <div class="position-grid">
+          <div class="position">
+            <div class="position-title">GK</div>
+            <p><strong>Goalkeeper</strong></p>
+            <p>
+              The only player who can use their hands (within the penalty area).
+              Protects the goal and organizes the defense.
+            </p>
+          </div>
+
+          <div class="position">
+            <div class="position-title">CB</div>
+            <p><strong>Center Back</strong></p>
+            <p>
+              Defensive anchors who prevent opponents from scoring. Strong
+              tacklers and headers.
+            </p>
+          </div>
+
+          <div class="position">
+            <div class="position-title">FB</div>
+            <p><strong>Full Back</strong></p>
+            <p>
+              Defenders on the sides (left/right) who defend wide areas and
+              support attacks.
+            </p>
+          </div>
+
+          <div class="position">
+            <div class="position-title">CDM</div>
+            <p><strong>Defensive Midfielder</strong></p>
+            <p>
+              Sits in front of the defense, breaking up opponent attacks and
+              distributing the ball.
+            </p>
+          </div>
+
+          <div class="position">
+            <div class="position-title">CM</div>
+            <p><strong>Central Midfielder</strong></p>
+            <p>
+              The engine room. Links defense and attack, controls the tempo of
+              the game.
+            </p>
+          </div>
+
+          <div class="position">
+            <div class="position-title">CAM</div>
+            <p><strong>Attacking Midfielder</strong></p>
+            <p>
+              Creates chances for strikers, often the most creative player on
+              the team.
+            </p>
+          </div>
+
+          <div class="position">
+            <div class="position-title">W</div>
+            <p><strong>Winger</strong></p>
+            <p>
+              Fast players on the sides who beat defenders and deliver crosses
+              into the box.
+            </p>
+          </div>
+
+          <div class="position">
+            <div class="position-title">ST</div>
+            <p><strong>Striker</strong></p>
+            <p>
+              The main goal scorer. Positioned furthest forward to convert
+              chances into goals.
+            </p>
+          </div>
+        </div>
+
+        <div class="highlight-box">
+          <h3>Common Formations</h3>
+          <div class="grid-2">
+            <div>
+              <p>
+                <strong>4-4-2:</strong> Classic balanced formation with 4
+                defenders, 4 midfielders, 2 strikers
+              </p>
+              <p>
+                <strong>4-3-3:</strong> Attacking formation with wingers
+                supporting a central striker
+              </p>
+              <p>
+                <strong>3-5-2:</strong> Three center backs, five midfielders,
+                two strikers
+              </p>
+            </div>
+            <div>
+              <p>
+                <strong>4-2-3-1:</strong> Defensive stability with creative
+                attackers behind a lone striker
+              </p>
+              <p>
+                <strong>5-3-2:</strong> Very defensive with wing-backs providing
+                width
+              </p>
+              <p>
+                <strong>4-1-4-1:</strong> One defensive midfielder protecting
+                the back four
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="rules">
+        <h2>📋 Rules & Laws of the Game</h2>
+
+        <h3>The 17 Laws of Football</h3>
+        <p>
+          Football is governed by 17 official laws set by the International
+          Football Association Board (IFAB):
+        </p>
+
+        <ol>
+          <li><strong>The Field of Play</strong> - Dimensions and markings</li>
+          <li><strong>The Ball</strong> - Spherical, circumference 68-70cm</li>
+          <li>
+            <strong>The Players</strong> - 11 per team, substitutions allowed
+          </li>
+          <li>
+            <strong>The Players' Equipment</strong> - Jersey, shorts, socks,
+            shin guards, boots
+          </li>
+          <li>
+            <strong>The Referee</strong> - Enforces the laws, final
+            decision-maker
+          </li>
+          <li>
+            <strong>Other Match Officials</strong> - Assistant referees, fourth
+            official, VAR
+          </li>
+          <li>
+            <strong>The Duration of the Match</strong> - 2 x 45 minutes plus
+            stoppage time
+          </li>
+          <li>
+            <strong>The Start and Restart of Play</strong> - Kick-offs, drop
+            balls
+          </li>
+          <li>
+            <strong>The Ball In and Out of Play</strong> - When the ball crosses
+            boundary lines
+          </li>
+          <li>
+            <strong>Determining the Outcome</strong> - Goal scored when ball
+            fully crosses goal line
+          </li>
+          <li>
+            <strong>Offside</strong> - Player positioned illegally to gain
+            advantage
+          </li>
+          <li>
+            <strong>Fouls and Misconduct</strong> - Physical contact violations
+          </li>
+          <li>
+            <strong>Free Kicks</strong> - Direct and indirect kicks for fouls
+          </li>
+          <li>
+            <strong>The Penalty Kick</strong> - Awarded for fouls in the penalty
+            area
+          </li>
+          <li>
+            <strong>The Throw-In</strong> - Restarting play when ball goes out
+            on sideline
+          </li>
+          <li>
+            <strong>The Goal Kick</strong> - Restart when attacking team plays
+            ball over goal line
+          </li>
+          <li>
+            <strong>The Corner Kick</strong> - Restart when defending team plays
+            ball over goal line
+          </li>
+        </ol>
+
+        <h3>Key Rules Explained</h3>
+
+        <div class="grid-2">
+          <div class="card">
+            <h4>Offside Rule</h4>
+            <p>
+              A player is offside if they are closer to the opponent's goal line
+              than both the ball and the second-last defender when the ball is
+              played to them. Being offside is only penalized if the player is
+              involved in active play.
+            </p>
+            <p>
+              <strong>Exception:</strong> You cannot be offside from goal kicks,
+              throw-ins, or corner kicks.
+            </p>
+          </div>
+
+          <div class="card">
+            <h4>Fouls & Free Kicks</h4>
+            <p>
+              <strong>Direct Free Kick:</strong> Awarded for physical fouls
+              (pushing, tripping, holding). Can score directly.
+            </p>
+            <p>
+              <strong>Indirect Free Kick:</strong> For technical offenses
+              (dangerous play, obstruction). Must touch another player before
+              scoring.
+            </p>
+          </div>
+
+          <div class="card">
+            <h4>Cards</h4>
+            <p>
+              <strong>Yellow Card:</strong> Caution for unsporting behavior,
+              dissent, or persistent fouling. Two yellows = red card.
+            </p>
+            <p>
+              <strong>Red Card:</strong> Sent off for serious foul play, violent
+              conduct, or second yellow. Team plays with 10 players.
+            </p>
+          </div>
+
+          <div class="card">
+            <h4>Penalty Kick</h4>
+            <p>
+              Awarded when a foul occurs inside the penalty area. Taken from the
+              penalty spot (12 yards from goal) with only the goalkeeper
+              defending. High-pressure moment!
+            </p>
+          </div>
+
+          <div class="card">
+            <h4>Handball</h4>
+            <p>
+              Deliberately touching the ball with hand or arm is a foul. If it
+              makes the body "unnaturally bigger" or leads to a goal/chance,
+              it's handball even if unintentional.
+            </p>
+          </div>
+
+          <div class="card">
+            <h4>VAR (Video Assistant Referee)</h4>
+            <p>
+              Technology used to review key decisions: goals, penalties, red
+              cards, and mistaken identity. The on-field referee makes the final
+              decision after reviewing footage.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="tactics">
+        <h2>🎲 Tactics & Strategy</h2>
+
+        <h3>Playing Styles</h3>
+
+        <div class="grid-2">
+          <div class="card">
+            <h4>Tiki-Taka</h4>
+            <p>
+              Short passing, possession-based football. Keep the ball, wear down
+              opponents, create space. Made famous by Barcelona and Spain.
+            </p>
+          </div>
+
+          <div class="card">
+            <h4>Counter-Attacking</h4>
+            <p>
+              Defend deep, win the ball, then quickly attack with pace. Exploit
+              spaces left by opponent's attack.
+            </p>
+          </div>
+
+          <div class="card">
+            <h4>High Press</h4>
+            <p>
+              Pressure opponents high up the pitch to win the ball in dangerous
+              areas. Requires high fitness and coordination.
+            </p>
+          </div>
+
+          <div class="card">
+            <h4>Parking the Bus</h4>
+            <p>
+              Ultra-defensive approach with all players behind the ball.
+              Frustrate opponents and look for set pieces or counter-attacks.
+            </p>
+          </div>
+
+          <div class="card">
+            <h4>Route One</h4>
+            <p>
+              Long balls from defense to strikers, bypassing midfield. Direct,
+              physical style of play.
+            </p>
+          </div>
+
+          <div class="card">
+            <h4>Total Football</h4>
+            <p>
+              Players interchange positions fluidly. Any outfield player can
+              play any role. Requires exceptional technical ability.
+            </p>
+          </div>
+        </div>
+
+        <h3>Set Pieces</h3>
+        <p>Carefully planned plays from restarts:</p>
+        <ul>
+          <li>
+            <strong>Corner Kicks:</strong> Delivered into the penalty area,
+            attackers try to score from crosses or flick-ons
+          </li>
+          <li>
+            <strong>Free Kicks:</strong> Can be shot directly at goal or crossed
+            to teammates
+          </li>
+          <li>
+            <strong>Throw-Ins:</strong> Long throws can create attacking chances
+            like corners
+          </li>
+          <li>
+            <strong>Penalties:</strong> Practice routines, goalkeeper psychology
+          </li>
+        </ul>
+
+        <h3>Key Tactical Concepts</h3>
+        <div class="highlight-box">
+          <p>
+            <strong>Width:</strong> Spreading play across the pitch to stretch
+            the defense
+          </p>
+          <p>
+            <strong>Overload:</strong> Creating numerical advantage in a
+            specific area
+          </p>
+          <p>
+            <strong>Pressing Triggers:</strong> Conditions that activate team
+            pressing (e.g., bad touch, pass to full-back)
+          </p>
+          <p>
+            <strong>Transition:</strong> Speed of switching between attack and
+            defense
+          </p>
+          <p>
+            <strong>Shape:</strong> The team's structure when in/out of
+            possession
+          </p>
+        </div>
+      </section>
+
+      <section id="competitions">
+        <h2>🏆 Major Football Competitions</h2>
+
+        <h3>International Tournaments</h3>
+
+        <div class="card">
+          <h4>FIFA World Cup</h4>
+          <p>
+            The biggest sporting event in the world, held every 4 years. 32
+            nations (expanding to 48 in 2026) compete for the ultimate prize in
+            football. Countries qualify through continental competitions.
+          </p>
+          <p>
+            <strong>Most Wins:</strong> Brazil (5), Germany & Italy (4 each)
+          </p>
+        </div>
+
+        <div class="card">
+          <h4>UEFA European Championship (Euros)</h4>
+          <p>
+            Europe's premier international tournament, held every 4 years. Top
+            European nations battle for continental supremacy.
+          </p>
+        </div>
+
+        <div class="card">
+          <h4>Copa América</h4>
+          <p>
+            South America's championship, featuring footballing giants like
+            Brazil, Argentina, and Uruguay.
+          </p>
+        </div>
+
+        <div class="card">
+          <h4>Africa Cup of Nations (AFCON)</h4>
+          <p>
+            Africa's continental championship showcasing the continent's
+            incredible talent.
+          </p>
+        </div>
+
+        <h3>Club Competitions</h3>
+
+        <div class="grid-2">
+          <div class="card">
+            <h4>UEFA Champions League</h4>
+            <p>
+              The most prestigious club competition in the world. Top European
+              clubs compete in a group stage followed by knockout rounds.
+              Winning the Champions League is every club's dream.
+            </p>
+          </div>
+
+          <div class="card">
+            <h4>UEFA Europa League</h4>
+            <p>
+              Europe's second-tier club competition. Winner qualifies for next
+              season's Champions League.
+            </p>
+          </div>
+
+          <div class="card">
+            <h4>Copa Libertadores</h4>
+            <p>
+              South America's premier club competition, equivalent to the
+              Champions League. Historic tournament with passionate fans.
+            </p>
+          </div>
+
+          <div class="card">
+            <h4>FIFA Club World Cup</h4>
+            <p>
+              Annual tournament featuring champion clubs from each continent
+              competing for global supremacy.
+            </p>
+          </div>
+        </div>
+
+        <h3>Domestic Leagues</h3>
+        <p>Football's bread and butter - weekly league competitions:</p>
+
+        <div class="highlight-box">
+          <p>
+            <strong>English Premier League:</strong> 20 teams, most-watched
+            league globally, known for pace and physicality
+          </p>
+          <p>
+            <strong>La Liga (Spain):</strong> Home to Barcelona and Real Madrid,
+            technical excellence
+          </p>
+          <p>
+            <strong>Serie A (Italy):</strong> Tactical sophistication, defensive
+            masterclasses
+          </p>
+          <p>
+            <strong>Bundesliga (Germany):</strong> Affordable tickets, amazing
+            atmosphere, high-scoring games
+          </p>
+          <p>
+            <strong>Ligue 1 (France):</strong> Produces incredible young talent
+          </p>
+          <p>
+            <strong>MLS (USA/Canada):</strong> Growing league with unique
+            playoff system
+          </p>
+        </div>
+
+        <h3>Knockout Cups</h3>
+        <p>Most countries have domestic cup competitions:</p>
+        <ul>
+          <li>
+            <strong>FA Cup (England):</strong> Oldest football competition,
+            allows lower league teams to face giants
+          </li>
+          <li><strong>Copa del Rey (Spain)</strong></li>
+          <li><strong>DFB-Pokal (Germany)</strong></li>
+          <li><strong>Coppa Italia (Italy)</strong></li>
+        </ul>
+      </section>
+
+      <section id="transfers">
+        <h2>💰 Transfers & Transfer Market</h2>
+
+        <h3>What is a Transfer?</h3>
+        <p>
+          A transfer is when a player moves from one club to another. The buying
+          club pays a <strong>transfer fee</strong> to the selling club, and the
+          player signs a new contract with agreed wages.
+        </p>
+
+        <h3>Transfer Windows</h3>
+        <div class="highlight-box">
+          <p>
+            <strong>Summer Transfer Window:</strong> Usually runs from July to
+            early September (varies by league). The main window for big moves.
+          </p>
+          <p>
+            <strong>Winter Transfer Window:</strong> January, shorter window for
+            mid-season reinforcements.
+          </p>
+          <p>
+            <em
+              >Players can only be registered and play for new clubs during
+              these windows.</em
+            >
+          </p>
+        </div>
+
+        <h3>Types of Transfers</h3>
+
+        <div class="grid-2">
+          <div class="card">
+            <h4>Permanent Transfer</h4>
+            <p>
+              Player moves permanently to new club. Transfer fee paid, new
+              multi-year contract signed. This is the standard transfer.
+            </p>
+          </div>
+
+          <div class="card">
+            <h4>Loan Transfer</h4>
+            <p>
+              Player temporarily joins another club for a period (usually one
+              season). Original club retains registration. Can include option or
+              obligation to buy.
+            </p>
+          </div>
+
+          <div class="card">
+            <h4>Free Transfer</h4>
+            <p>
+              Player's contract expired, joins new club without transfer fee.
+              Club only pays wages and signing bonus. Also called "Bosman"
+              transfer.
+            </p>
+          </div>
+
+          <div class="card">
+            <h4>Swap Deal</h4>
+            <p>
+              Two players exchange clubs, sometimes with additional money
+              involved to balance the deal.
+            </p>
+          </div>
+        </div>
+
+        <h3>Transfer Fee Structure</h3>
+        <ul>
+          <li>
+            <strong>Base Fee:</strong> The main amount paid upfront or in
+            installments
+          </li>
+          <li>
+            <strong>Add-ons:</strong> Additional payments based on achievements
+            (appearances, goals, trophies)
+          </li>
+          <li>
+            <strong>Sell-on Clause:</strong> Original club gets percentage of
+            future transfer fees
+          </li>
+          <li>
+            <strong>Release Clause:</strong> Pre-agreed price that allows player
+            to leave if met
+          </li>
+        </ul>
+
+        <h3>Contract Elements</h3>
+        <div class="highlight-box">
+          <p>
+            <strong>Wages:</strong> Weekly or yearly salary paid to the player
+          </p>
+          <p>
+            <strong>Signing Bonus:</strong> One-time payment when signing
+            contract
+          </p>
+          <p>
+            <strong>Performance Bonuses:</strong> Extra money for goals,
+            assists, clean sheets, team success
+          </p>
+          <p>
+            <strong>Image Rights:</strong> Commercial earnings from player's
+            likeness
+          </p>
+          <p>
+            <strong>Contract Length:</strong> Typically 3-5 years for
+            established players
+          </p>
+        </div>
+
+        <h3>Key Terms</h3>
+        <ul>
+          <li>
+            <strong>Medical:</strong> Health examination before transfer is
+            finalized
+          </li>
+          <li>
+            <strong>Agent/Representative:</strong> Negotiates on behalf of
+            player
+          </li>
+          <li>
+            <strong>Work Permit:</strong> Required for international transfers
+          </li>
+          <li>
+            <strong>FIFA TMS:</strong> Transfer Matching System for
+            international transfers
+          </li>
+          <li>
+            <strong>Tribunal:</strong> Independent panel that sets fee when
+            clubs can't agree
+          </li>
+        </ul>
+
+        <h3>Record Transfers</h3>
+        <p>The transfer market has exploded in recent years:</p>
+        <ul>
+          <li>Neymar to PSG: €222 million (2017)</li>
+          <li>Kylian Mbappé to PSG: €180 million (2018)</li>
+          <li>Philippe Coutinho to Barcelona: €160 million (2018)</li>
+        </ul>
+      </section>
+
+      <section id="promotion">
+        <h2>⬆️ Promotion & Relegation System</h2>
+
+        <h3>The Pyramid Structure</h3>
+        <p>
+          Most football leagues worldwide use a
+          <strong>promotion and relegation system</strong> - a hierarchical
+          structure where teams can move between divisions based on performance.
+        </p>
+
+        <div class="highlight-box">
+          <h4>How It Works</h4>
+          <p>
+            <strong>Promotion:</strong> Top teams in lower divisions move up to
+            higher divisions
+          </p>
+          <p>
+            <strong>Relegation:</strong> Bottom teams in higher divisions move
+            down to lower divisions
+          </p>
+          <p>
+            This creates a connected pyramid from amateur to professional
+            football, where theoretically any team can reach the top through
+            sustained success.
+          </p>
+        </div>
+
+        <h3>English Football Pyramid Example</h3>
+        <div class="card">
+          <h4>Tier 1: Premier League (20 teams)</h4>
+          <p><strong>Promotion to:</strong> N/A (top tier)</p>
+          <p><strong>Relegation:</strong> Bottom 3 teams → Championship</p>
+        </div>
+
+        <div class="card">
+          <h4>Tier 2: Championship (24 teams)</h4>
+          <p>
+            <strong>Promotion:</strong> Top 2 automatically + playoff winner
+            (teams 3rd-6th) → Premier League
+          </p>
+          <p><strong>Relegation:</strong> Bottom 3 teams → League One</p>
+        </div>
+
+        <div class="card">
+          <h4>Tier 3: League One (24 teams)</h4>
+          <p>
+            <strong>Promotion:</strong> Top 2 + playoff winner → Championship
+          </p>
+          <p><strong>Relegation:</strong> Bottom 4 teams → League Two</p>
+        </div>
+
+        <div class="card">
+          <h4>Tier 4+: League Two & below</h4>
+          <p>
+            System continues down through semi-professional and amateur leagues
+          </p>
+        </div>
+
+        <h3>Playoffs</h3>
+        <p>
+          Many leagues use <strong>playoffs</strong> to determine final
+          promotion spot:
+        </p>
+        <ul>
+          <li>Teams finishing 3rd-6th enter playoff tournament</li>
+          <li>Semi-finals over two legs (home and away)</li>
+          <li>
+            Final typically at neutral venue (e.g., Wembley for English
+            Championship)
+          </li>
+          <li>
+            Winner earns promotion - often called "richest game in football" due
+            to financial rewards
+          </li>
+        </ul>
+
+        <h3>Financial Impact</h3>
+        <div class="highlight-box">
+          <p><strong>Promotion Benefits:</strong></p>
+          <ul>
+            <li>
+              Massive increase in TV revenue (especially to Premier League)
+            </li>
+            <li>Higher matchday income from bigger stadiums and prices</li>
+            <li>Enhanced commercial opportunities and sponsorships</li>
+            <li>Ability to attract better players</li>
+          </ul>
+          <p><strong>Relegation Consequences:</strong></p>
+          <ul>
+            <li>
+              Severe loss of revenue (Premier League relegation = £100m+ loss)
+            </li>
+            <li>Player departures (release clauses often activate)</li>
+            <li>
+              Wage bill problems - "parachute payments" help offset losses
+            </li>
+            <li>Need for squad restructuring</li>
+          </ul>
+        </div>
+
+        <h3>Different Systems Worldwide</h3>
+        <ul>
+          <li>
+            <strong>Spain (La Liga):</strong> Bottom 3 relegated, top 2 from
+            Segunda División promoted + playoff winner
+          </li>
+          <li>
+            <strong>Germany (Bundesliga):</strong> Bottom 2 relegated, 16th
+            place plays playoff vs 3rd place from 2. Bundesliga
+          </li>
+          <li>
+            <strong>Italy (Serie A):</strong> Bottom 3 relegated, top 3 from
+            Serie B promoted
+          </li>
+          <li>
+            <strong>USA (MLS):</strong> NO relegation - closed league system
+            with playoffs for champions
+          </li>
+        </ul>
+
+        <h3>Parachute Payments</h3>
+        <p>
+          In England, relegated Premier League clubs receive
+          <strong>parachute payments</strong> - financial support spread over
+          2-3 years to help manage the transition and maintain competitiveness.
+          Critics argue this creates unfair advantage in lower divisions.
+        </p>
+
+        <h3>Why It Matters</h3>
+        <p>
+          The promotion/relegation system creates drama throughout the entire
+          season - not just at the top fighting for titles, but also the intense
+          relegation battles at the bottom. Every match matters, even for
+          mid-table teams who might get dragged into the scrap!
+        </p>
+      </section>
+
+      <section id="glossary">
+        <h2>📖 Football Glossary</h2>
+
+        <div class="grid-2">
+          <div class="card">
+            <h4>Hat-Trick</h4>
+            <p>
+              Three goals scored by one player in a single match. A "perfect
+              hat-trick" uses right foot, left foot, and header.
+            </p>
+          </div>
+
+          <div class="card">
+            <h4>Clean Sheet</h4>
+            <p>
+              When a team doesn't concede any goals in a match. Important
+              statistic for defenders and goalkeepers.
+            </p>
+          </div>
+
+          <div class="card">
+            <h4>Derby</h4>
+            <p>
+              Match between fierce local rivals (e.g., Manchester United vs
+              Manchester City). Intense atmosphere and bragging rights!
+            </p>
+          </div>
+
+          <div class="card">
+            <h4>El Clásico</h4>
+            <p>
+              The famous rivalry between Real Madrid and Barcelona. One of the
+              biggest matches in world football.
+            </p>
+          </div>
+
+          <div class="card">
+            <h4>Nutmeg</h4>
+            <p>
+              Skill move where you kick the ball through an opponent's legs and
+              collect it on the other side. Highly embarrassing for the
+              defender!
+            </p>
+          </div>
+
+          <div class="card">
+            <h4>Bicycle Kick</h4>
+            <p>
+              Spectacular overhead kick where player is horizontal in the air,
+              striking the ball backward over their head.
+            </p>
+          </div>
+
+          <div class="card">
+            <h4>Assist</h4>
+            <p>
+              Final pass or cross that directly leads to a goal. Key statistic
+              for creative players.
+            </p>
+          </div>
+
+          <div class="card">
+            <h4>Own Goal</h4>
+            <p>
+              When a player accidentally scores in their own net. Nightmare
+              scenario for defenders.
+            </p>
+          </div>
+
+          <div class="card">
+            <h4>Stoppage Time</h4>
+            <p>
+              Extra minutes added at end of each half to compensate for time
+              lost to injuries, substitutions, etc. Also called "injury time."
+            </p>
+          </div>
+
+          <div class="card">
+            <h4>Aggregate Score</h4>
+            <p>
+              Combined score over two legs (home and away matches). Used in cup
+              competitions and playoffs.
+            </p>
+          </div>
+
+          <div class="card">
+            <h4>Golden Boot</h4>
+            <p>Award for top goalscorer in a competition or league season.</p>
+          </div>
+
+          <div class="card">
+            <h4>False Nine</h4>
+            <p>
+              Striker who drops deep into midfield rather than staying up front,
+              creating space and confusion.
+            </p>
+          </div>
+
+          <div class="card">
+            <h4>Treble</h4>
+            <p>
+              Winning three major trophies in one season (usually league,
+              domestic cup, and European competition).
+            </p>
+          </div>
+
+          <div class="card">
+            <h4>Box-to-Box Midfielder</h4>
+            <p>
+              Midfielder with incredible stamina who contributes in both defense
+              and attack throughout the match.
+            </p>
+          </div>
+
+          <div class="card">
+            <h4>Sweeper</h4>
+            <p>
+              Defensive player who "sweeps up" danger behind the defensive line.
+              Less common in modern football.
+            </p>
+          </div>
+
+          <div class="card">
+            <h4>Extra Time</h4>
+            <p>
+              Two 15-minute periods played if match is tied in knockout
+              competitions. Followed by penalty shootout if still tied.
+            </p>
+          </div>
+
+          <div class="card">
+            <h4>Advantage</h4>
+            <p>
+              When referee allows play to continue after a foul because the
+              fouled team maintains possession or attacking opportunity.
+            </p>
+          </div>
+
+          <div class="card">
+            <h4>Through Ball</h4>
+            <p>
+              Pass played between defenders into space behind them for a
+              teammate to run onto.
+            </p>
+          </div>
+
+          <div class="card">
+            <h4>Ultras</h4>
+            <p>
+              Passionate, organized fan groups known for creating intense
+              atmosphere with chants, flags, and displays.
+            </p>
+          </div>
+
+          <div class="card">
+            <h4>Playmaker</h4>
+            <p>
+              Player who orchestrates attacks, usually through vision, passing,
+              and creativity. The team's conductor.
+            </p>
+          </div>
+        </div>
+
+        <h3>Common Abbreviations</h3>
+        <div class="highlight-box">
+          <p>
+            <strong>GK:</strong> Goalkeeper | <strong>CB:</strong> Center Back |
+            <strong>LB/RB:</strong> Left/Right Back |
+            <strong>CDM:</strong> Central Defensive Midfielder |
+            <strong>CM:</strong> Central Midfielder |
+            <strong>CAM:</strong> Central Attacking Midfielder |
+            <strong>LW/RW:</strong> Left/Right Winger |
+            <strong>ST:</strong> Striker | <strong>CF:</strong> Center Forward
+          </p>
+          <p>
+            <strong>EPL/PL:</strong> English Premier League |
+            <strong>UCL:</strong> UEFA Champions League |
+            <strong>UEL:</strong> UEFA Europa League |
+            <strong>WC:</strong> World Cup | <strong>VAR:</strong> Video
+            Assistant Referee | <strong>MOTM:</strong> Man of the Match
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <h2>⚡ Quick Tips for New Fans</h2>
+
+        <div class="grid-2">
+          <div class="card">
+            <h4>Pick a Team</h4>
+            <p>
+              Choose a team to support - it makes watching more engaging!
+              Consider local teams, playing style, history, or players you
+              admire.
+            </p>
+          </div>
+
+          <div class="card">
+            <h4>Watch Regularly</h4>
+            <p>
+              Understanding grows with exposure. Watch different leagues and
+              competitions to see various styles.
+            </p>
+          </div>
+
+          <div class="card">
+            <h4>Learn the Rules Gradually</h4>
+            <p>
+              Don't stress about knowing everything immediately. Offside will
+              make sense eventually!
+            </p>
+          </div>
+
+          <div class="card">
+            <h4>Engage with Community</h4>
+            <p>
+              Join fan forums, follow football accounts on social media, play
+              fantasy football to deepen your knowledge.
+            </p>
+          </div>
+
+          <div class="card">
+            <h4>Try Playing</h4>
+            <p>
+              The best way to understand football is to play it, even casually
+              with friends or in a local league.
+            </p>
+          </div>
+
+          <div class="card">
+            <h4>Watch Documentaries</h4>
+            <p>
+              Great documentaries exist about teams, players, and tournaments
+              that provide context and history.
+            </p>
+          </div>
+        </div>
+
+        <div class="highlight-box">
+          <h3>Remember</h3>
+          <p>
+            Football is called "the beautiful game" because it brings people
+            together across all boundaries. Every fan was once a beginner. The
+            passion, drama, and joy of football are universal - welcome to the
+            greatest sport on Earth! <span class="ball-icon">⚽</span>
+          </p>
+        </div>
+      </section>
+    </div>
+
+    <footer>
+      <p>
+        <span class="ball-icon">⚽</span> Football for Beginners
+        <span class="ball-icon">⚽</span>
+      </p>
+      <p>The Beautiful Game Awaits</p>
+    </footer>
+  </body>
+
+  <script>
+    // Smooth scrolling (keep this – it’s fine)
+    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+      anchor.addEventListener("click", function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute("href")).scrollIntoView({
+          behavior: "smooth",
+        });
+      });
+    });
+
+    // HEADER HOVER (minor cleanup)
+    const header = document.querySelector("h1");
+    header.addEventListener("mouseenter", () => {
+      header.style.transform = "scale(1.08)";
+      header.style.transition = "transform 0.3s ease";
+    });
+    header.addEventListener("mouseleave", () => {
+      header.style.transform = "scale(1)";
+    });
+
+    // NAV HIGHLIGHT ON SCROLL (FIXED)
+    const sections = document.querySelectorAll("section[id]");
+    const navLinks = document.querySelectorAll("nav a");
+
+    window.addEventListener("scroll", () => {
+      let currentSection = "";
+
+      sections.forEach((section) => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.offsetHeight;
+
+        if (
+          pageYOffset >= sectionTop - 120 &&
+          pageYOffset < sectionTop + sectionHeight - 120
+        ) {
+          currentSection = section.getAttribute("id");
+        }
+      });
+
+      navLinks.forEach((link) => {
+        link.classList.remove("active");
+        if (link.getAttribute("href") === `#${currentSection}`) {
+          link.classList.add("active");
+        }
+      });
+    });
+  </script>
+</html>
